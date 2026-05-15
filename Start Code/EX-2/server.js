@@ -7,39 +7,75 @@ const server = http.createServer((req, res) => {
 
     console.log(`Received ${method} request for ${url}`);
 
-    if (url === '/' && method === 'GET') {
-        res.writeHead(200, { 'Content-Type': 'text/html' });
-        return res.end(`
-            <html>
-                <head><title>Home</title></head>
-                <body>
-                    <h1>Welcome to the Home Page</h1>
-                    <p>This is a simple Node.js server.</p>
-                </body>
-            </html>
-        `);
-    }
-    // Implement more routes here
-    if (method ==='GET' && url === '/about') {
-        res.writeHead(200, { 'Content-Type': 'text/plain'});
-        return res.end("About us: at CADT, we love node.js!");
-    }
-    else if (method === 'GET' && url === '/contact-us') {
-        res.writeHead(200, { 'Content-Type': 'text/plain'});
-        return res.end("You can reach us vai email…");
+//     if (url === '/' && method === 'GET') {
+        // res.writeHead(200, { 'Content-Type': 'text/html' });
+        // return res.end(`
+        //     <html>
+        //         <head><title>Home</title></head>
+        //         <body>
+        //             <h1>Welcome to the Home Page</h1>
+        //             <p>This is a simple Node.js server.</p>
+        //         </body>
+        //     </html>
+        // `);
+//     }
+//     // Implement more routes here
+//     if (method ==='GET' && url === '/about') {
+        // res.writeHead(200, { 'Content-Type': 'text/plain'});
+        // return res.end("About us: at CADT, we love node.js!");
+//     }
+//     else if (method === 'GET' && url === '/contact-us') {
+//         res.writeHead(200, { 'Content-Type': 'text/plain'});
+//         return res.end("You can reach us vai email…");
 
-    }
-    else if (method === 'GET' && url === '/products') {
-        res.writeHead(200, { 'Content-Type': 'text/plain'});
-        return res.end("Buy one get one…");
-    }
-    else if (method === 'GET' && url === '/projects') {
-        res.writeHead(200, { 'Content-Type': 'text/plain'});
-        return res.end("Here are our awesome projects");
-    }
-    else {
-        res.writeHead(404, { 'Content-Type': 'text/plain' });
-        return res.end('404 Not Found');
+//     }
+//     else if (method === 'GET' && url === '/products') {
+//         res.writeHead(200, { 'Content-Type': 'text/plain'});
+//         return res.end("Buy one get one…");
+//     }
+//     else if (method === 'GET' && url === '/projects') {
+//         res.writeHead(200, { 'Content-Type': 'text/plain'});
+//         return res.end("Here are our awesome projects");
+//     }
+//     else {
+//         res.writeHead(404, { 'Content-Type': 'text/plain' });
+//         return res.end('404 Not Found');
+//     }
+
+    switch(true) {
+        case url === '/' && method === 'GET': 
+            res.writeHead(200, { 'Content-Type': 'text/html' });
+            return res.end(`
+                <html>
+                    <head><title>Home</title></head>
+                    <body>
+                        <h1>Welcome to the Home Page</h1>
+                        <p>This is a simple Node.js server.</p>
+                    </body>
+                </html>
+            `);
+            break;
+        case method ==='GET' && url === '/about':
+            res.writeHead(200, { 'Content-Type': 'text/plain'});
+            return res.end("About us: at CADT, we love node.js!");
+            break;
+        case method === 'GET' && url === '/contact-us':
+            res.writeHead(200, { 'Content-Type': 'text/plain'});
+            return res.end("You can reach us vai email…");
+            break;
+        case method === 'GET' && url === '/products':
+            res.writeHead(200, { 'Content-Type': 'text/plain'});
+            return res.end("Buy one get one…");
+            break;
+        case method === 'GET' && url === '/projects':
+            res.writeHead(200, { 'Content-Type': 'text/plain'});
+            return res.end("Here are our awesome projects");
+            break;
+        default:
+            res.writeHead(404, { 'Content-Type': 'text/plain' });
+            return res.end('404 Not Found');
+            break;
+
     }
 });
 
