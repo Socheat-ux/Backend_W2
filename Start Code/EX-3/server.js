@@ -25,6 +25,35 @@ const server = http.createServer((req, res) => {
 
     if (url === '/contact' && method === 'POST') {
         // Implement form submission handling
+        let body = '';
+        req.on('data', chunk =>{
+            body += chunk.toString();
+        })
+
+        req.on ('end', () => {
+            const parsedBody = new URLSearchParams(body);
+            const name = parsedBody.get('name');
+
+            console.log('Submitted Name:', name);
+
+            fs.appendFile('submissions.txt', `${name}\n`, err => {
+
+                if (err) {
+                    console.error(err);
+                    res.writeHead(500, { 'Content-Type': 'text/plain'});
+                    return res.end('Error saving submission');
+                }
+                res.writeHead(200, { 'Content-Type': 'text/html'});
+
+                res.end(`
+                    <h1>Submission Successful</h1>
+                    <p>Thank you, ${name}!</p>
+                    <a href="/contact">Go Back</a>
+                `);
+            });
+        });
+
+        return;
     }
 
     else {
